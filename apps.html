@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>trivago Template Generator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Bootstrap -->
+  <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+
+  <style type="text/css">
+    @import url(http://fonts.googleapis.com/css?family=Montserrat:400,700);
+
+    body { background:rgb(30,30,40); }
+    form { max-width:70%; margin:50px auto; }
+
+    .feedback-input {
+      color:white;
+      font-family: Helvetica, Arial, sans-serif;
+      font-weight:500;
+      font-size: 18px;
+      border-radius: 5px;
+      line-height: 22px;
+      background-color: transparent;
+      border:2px solid #CC6666;
+      transition: all 0.3s;
+      padding: 13px;
+      margin-bottom: 15px;
+      width:100%;
+      box-sizing: border-box;
+      outline:0;
+    }
+
+    .feedback-input:focus { border:2px solid #CC4949; }
+
+    textarea {
+      height: 150px;
+      line-height: 150%;
+      resize:vertical;
+    }
+
+    [type="submit"] {
+      font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+      width: 100%;
+      background:#CC6666;
+      border-radius:5px;
+      border:0;
+      cursor:pointer;
+      color:white;
+      font-size:24px;
+      padding-top:10px;
+      padding-bottom:10px;
+      transition: all 0.3s;
+      margin-top:-4px;
+      font-weight:700;
+    }
+    [type="submit"]:hover { background:#CC4949; }
+
+  </style>
+
+<br><br>
+    <a href="index.html">
+      <img style="align:center; margin-left:43%;" src="icon.png" alt="trivago" class="img-rounded">
+    </a>
+
+
+
+
+
+
+
+  <!--                            Source:http://cssdeck.com/labs/simple-flat-contact-form-->
+  <form>      
+  <ul class="nav nav-tabs">
+    <li role="presentation" ><a href="index.html">Home</a></li>
+    <li role="presentation" class="active"><a href="apps.html">Profile</a></li>
+    <li role="presentation"><a href="#">Messages</a></li>
+
+  </ul>
+
+    <br>
+    <br>
+
+    <div class="panel panel-success">
+      <div class="panel-heading">Description (WHEN, AND and THEN format Please!)</div>
+    </div>
+    <div class="steps-bug">
+      <input name="name" type="text" id="step1" class="feedback-input" placeholder="WHEN blah blah" />   
+    </div>
+    <button  id= "addbuttonforinitialstep" type="button" onclick="addstep();" class="btn btn-info">Add Step</button>
+    <hr style="background:#F87431; border:0; height:7px" />
+
+    <br>
+    <br>
+
+    <div class="panel panel-danger">
+      <div class="panel-heading">Steps to Reproduce</div>
+
+    </div>
+        <div class="steps-bug_b">
+      <input name="name" type="text" id="step_1" class="feedback-input" placeholder="First Step" />   
+    </div>
+
+    <button  id= "addsteps_bug" type="button" onclick="addstep_b();" class="btn btn-info">Add Step</button>
+    <br>    <br>
+
+
+
+
+
+    <div class="panel panel-danger">
+      <div class="panel-heading">Current behavior: Screenshot name (Optional)</div>
+    </div>
+    <input name="text" id="wrongbehaviorscreenshot" class="feedback-input" placeholder="Please insert the name of the screenshot to be added."></textarea>
+
+    <hr style="background:#F87431; border:0; height:7px" />
+
+    <br>
+    <br>
+
+
+    <div class="panel panel-success">
+      <div class="panel-heading">Expected</div>
+    </div>
+        <div class="steps-bug_c">
+      <input name="name" type="text" id="step__1" class="feedback-input" placeholder="First Step" />   
+    </div>
+
+    <button  id= "addsteps__bug" type="button" onclick="addstep_c();" class="btn btn-info">Add Step</button>
+    <br>    <br>
+
+
+
+    <div class="panel panel-success">
+      <div class="panel-heading">Expected behavior: Screenshot name (Optional)</div>
+    </div>
+    <input name="text" id="correctbehaviorscreenshot" class="feedback-input" placeholder="Please insert the name of the screenshot to be added."></input>
+
+    <hr style="background:#F87431; border:0; height:7px" />
+
+    <br>
+    <br>
+
+
+
+    <div class="panel panel-success">
+      <div class="panel-heading">Experienced</div>
+    </div>
+        <div class="steps-bug_d">
+      <input name="name" type="text" id="step___1" class="feedback-input" placeholder="First Step" />   
+    </div>
+
+    <button  id= "addsteps___bug" type="button" onclick="addstep_d();" class="btn btn-info">Add Step</button>
+    <br>    <br>
+
+
+
+    <hr style="background:#F87431; border:0; height:7px" />
+
+
+    <br>
+    <br>
+
+
+
+
+    <button onclick="gettemplate()" type="button" class="btn btn-primary btn-lg">Get Code</button>
+
+    <br>
+    <br>
+
+    <textarea name="text" id="result" class="feedback-input" placeholder="" disabled></textarea>
+
+
+
+
+
+  </form>
+  <script src="https://code.jquery.com/jquery-2.1.3.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+  <script type="text/javascript">
+
+
+            //warn before browser close
+            $(function() {
+              $("#result").hide();
+
+              //window.onbeforeunload = function() {
+                //return "Are you Sure?"
+              //};
+            });
+
+
+            function SelectText(element) {
+              var doc = document;
+              var text = doc.getElementById(element);    
+                if (doc.body.createTextRange) { // ms
+                  var range = doc.body.createTextRange();
+                  range.moveToElementText(text);
+                  range.select();
+                } else if (window.getSelection) {
+                  var selection = window.getSelection();
+                  var range = doc.createRange();
+                  range.selectNodeContents(text);
+                  selection.removeAllRanges();
+                  selection.addRange(range);
+
+                }
+              }
+
+
+
+
+            //function to add class in the new step for reproducing bug.
+            var count = 1;
+            var count_ = 1;
+            var count__ = 1;
+            var count___ = 1;
+
+            function addstep(){
+                console.log(count);
+
+        
+              count++;
+              var id_name = "step".concat(count);
+              $( ".steps-bug" ).append( '<input name="name" type="text" id="' + id_name + '" class="feedback-input" />' );
+              if (count == 2){
+                $("#step".concat(count)).attr("placeholder", "AND");
+              }
+              else if (count == 3){
+                $("#step".concat(count)).attr("placeholder", "THEN");
+              }
+            
+              if (count == 3){
+                $( "#addbuttonforinitialstep" ).prop( "disabled", true );
+                //console.log();
+                return false;
+              }
+            }
+
+
+              function addstep_b(){
+                count_++;
+                var id_name = "step_".concat(count_);
+                $( ".steps-bug_b" ).append( '<input name="name" type="text" id="' + id_name + '" class="feedback-input" />' );
+              }
+
+
+              function addstep_c(){
+                count__++;
+                var id_name = "step__".concat(count__);
+                $( ".steps-bug_c" ).append( '<input name="name" type="text" id="' + id_name + '" class="feedback-input" />' );
+              }
+
+              function addstep_d(){
+                count___++;
+                var id_name = "step___".concat(count___);
+                $( ".steps-bug_d" ).append( '<input name="name" type="text" id="' + id_name + '" class="feedback-input" />' );
+              }
+
+              function gettemplate(){
+              
+                var part1 = '{panel:title=Description}' + "\n";
+
+                var desc_content = new Array("WHEN ", "AND ", "THEN ");
+                for (i=1;i<=count;i++){
+
+                  var idname = "step" + i;
+                  part1 = part1 + desc_content[i-1] + $("#" + idname).val() + "\n";
+                }
+                part1 = part1 + "{panel}" + "\n\n\n" + "h3. Steps to reproduce \n {panel:title=Steps}" + "\n";
+                for (i=1;i<=count_;i++){
+
+                  var idname = "step_" + i;
+                  part1 = part1 + "- " + $("#" + idname).val() + "\n";
+                }
+
+
+                part1 = part1 + "{panel}" + "\n\n\n" + "{panel:title=expected}" + "\n";
+                
+                for (i=1;i<=count__;i++){
+
+                  var idname = "step__" + i;
+                  part1 = part1 + "- " + $("#" + idname).val() + "\n";
+                }
+
+
+          
+                part1 = part1 + "{panel}" + "\n\n\n" + "{panel:title=experienced}" + "\n";
+                
+                for (i=1;i<=count___;i++){
+
+                  var idname = "step___" + i;
+                  part1 = part1 + "- " + $("#" + idname).val() + "\n";
+                }
+                part1 = part1 + "{panel}";
+
+
+                $("#result").text(part1);
+                $("#result").show();
+                SelectText("result");                                        
+                console.log(part1);
+
+              }
+
+            </script>
+
+
+
+
+
+          </body>
+
+
+          </html>
